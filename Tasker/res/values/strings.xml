@@ -7,9 +7,9 @@
 	<string name="menu_insert">Add Task</string>
 	<string name="menu_settings">Settings</string>
 	<string name="menu_delete">Delete Task</string>
-	 <string name="title">Title</string>
-    <string name="body">Body</string>
-    <string name="confirm">Save</string>
+	 <string name="title">Task Title</string>
+    <string name="body">What\'s going on?</string>
+    <string name="confirm">Save Task</string>
     <string name="edit_reminder">Edit Task</string>
     <string name="date">Tasker Date</string>
     <string name="time">Tasker Time</string>

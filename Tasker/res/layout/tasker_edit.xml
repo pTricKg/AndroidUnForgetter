@@ -6,61 +6,65 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="341dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/title" />
 
     <EditText
         android:id="@+id/title"
+        android:inputType="text"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-       />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/body" />
 
     <EditText
         android:id="@+id/body"
+        android:inputType="text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:minLines="5"
-        android:scrollbars="vertical"
-        android:gravity="top" />
-       
+        android:scrollbars="vertical" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/date" />
 
     <Button
         android:id="@+id/date_button"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/tasker_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/time" />
 
     <Button
         android:id="@+id/tasker_timer"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/confirm" />
 
     <Button
         android:id="@+id/tasker_save"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/confirm" />
 
 </LinearLayout>

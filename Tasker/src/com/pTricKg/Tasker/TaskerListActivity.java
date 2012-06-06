@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -38,13 +39,13 @@ public class TaskerListActivity extends ListActivity {
         Cursor taskerCursor = mDbHelper.fetchAllReminders();
         startManagingCursor(taskerCursor);
         
-        // Create an array to specify the fields we want to display in the list (only TITLE)
+        //create array
         String[] from = new String[]{TaskerDbAdapter.KEY_TITLE};
         
-        // and an array of the fields we want to bind those fields to (in this case just text1)
+        // specify which fields of array
         int[] to = new int[]{R.id.textView1};
         
-        // Now create a simple cursor adapter and set it to display
+        // set cursor
         SimpleCursorAdapter reminders = 
         	    new SimpleCursorAdapter(this, R.layout.tasker_row, taskerCursor, from, to);
         setListAdapter(reminders);
@@ -90,6 +91,9 @@ public class TaskerListActivity extends ListActivity {
   			switch(item.getItemId()) {
   			case R.id.menu_delete:
   				//delete task
+  				AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+  		        mDbHelper.deleteReminder(info.id);
+  		        fillData();
   				return true;
   		}
   			return super.onContextItemSelected(item);
