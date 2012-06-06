@@ -17,6 +17,14 @@ public class TaskerListActivity extends ListActivity {
         setContentView(R.layout.tasker_list);
         registerForContextMenu(getListView());
         
+        //Set up databaseArray
+        String[] items = new String[]{"Doo", "Dee", "Duh", "Doh"};
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.tasker_row,
+        		R.id.textRow, items);
+        setListAdapter(adapter);
+        
+               
     }
     
     //set up event-handling
@@ -25,12 +33,7 @@ public class TaskerListActivity extends ListActivity {
     	super.onListItemClick(l, v, position, id);
     	
     }
-        //Set up database
-        String[] items = new String[]{"Doo", "Dee", "Duh", "Doh"};
         
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.tasker_row,
-        		R.id.textRow, items);
-//        setListAdapter(adapter);
         
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
