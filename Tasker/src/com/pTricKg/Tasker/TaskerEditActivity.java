@@ -189,7 +189,7 @@ public class TaskerEditActivity extends Activity {
 				}
 	            mCalendar.setTime(date); 
 			} catch (ParseException e) {
-				Log.e("ReminderEditActivity", e.getMessage(), e); 
+				Log.e("TaskerEditActivity", e.getMessage(), e); 
 			} 
         } else {
         	// This is a new task - add defaults from preferences if set. 

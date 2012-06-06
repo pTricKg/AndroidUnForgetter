@@ -8,7 +8,7 @@ import android.os.PowerManager;
 public abstract class WakeTaskerIntentService extends IntentService {
 abstract void doTaskerWork(Intent intent);
 
-	public static final String LOCK_NAME_STATIC="com.dummies.android.taskreminder.Static";
+	public static final String LOCK_NAME_STATIC="com.pTricKg.tasker.Static";
 	private static PowerManager.WakeLock lockStatic=null;
 
 	public static void acquireStaticLock(Context context) {
