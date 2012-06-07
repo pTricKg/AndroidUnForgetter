@@ -40,7 +40,6 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int body=0x7f050007;
-        public static final int confirm=0x7f050008;
         public static final int date=0x7f05000a;
         public static final int edit_reminder=0x7f050009;
         public static final int edit_reminder_title=0x7f050002;
@@ -71,6 +70,7 @@ public final class R {
         /**  Toasts 
          */
         public static final int task_saved_message=0x7f05000c;
+        public static final int tasker_save=0x7f050008;
         public static final int time=0x7f05000b;
         public static final int title=0x7f050006;
     }

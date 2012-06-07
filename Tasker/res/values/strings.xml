@@ -9,7 +9,7 @@
 	<string name="menu_delete">Delete Task</string>
 	 <string name="title">Task Title</string>
     <string name="body">What\'s going on?</string>
-    <string name="confirm">Save Task</string>
+    <string name="tasker_save">Save Task</string>
     <string name="edit_reminder">Edit Task</string>
     <string name="date">Tasker Date</string>
     <string name="time">Tasker Time</string>

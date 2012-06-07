@@ -20,13 +20,13 @@ public class TaskerListActivity extends ListActivity {
     private static final int ACTIVITY_EDIT=1;
     
     private TaskerDbAdapter mDbHelper;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasker_list);
-        registerForContextMenu(getListView());
-        
+                
         mDbHelper = new TaskerDbAdapter(this);
         mDbHelper.open();
         fillData();
