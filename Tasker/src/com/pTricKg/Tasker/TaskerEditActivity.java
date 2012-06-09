@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class TaskerEditActivity extends Activity {
 	
 	
-	//dialog stuff
+	//dialog stuff for date/time picker
 	private static final int DATE_PICKER_DIALOG = 0;
 	private static final int TIME_PICKER_DIALOG = 1;
 
@@ -33,7 +33,7 @@ public class TaskerEditActivity extends Activity {
 	private static final String TIME_FORMAT = "kk:mm";
 	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy kk:mm:ss";
 
-//	initialize variables
+//	initialized variables
 	private EditText mTitleText;
     private EditText mBodyText;
     private Button mDateButton;
@@ -51,6 +51,7 @@ public class TaskerEditActivity extends Activity {
         
         setContentView(R.layout.tasker_edit);
         
+        //initializing variables
         mCalendar = Calendar.getInstance(); 
         mTitleText = (EditText) findViewById(R.id.title);
         mBodyText = (EditText) findViewById(R.id.body);
@@ -88,10 +89,12 @@ public class TaskerEditActivity extends Activity {
 		populateFields();
     }
     
+    //called by showDialog method in registerButtonListener
+    //int id passed into showDialog
     @Override
     protected Dialog onCreateDialog(int id) {
     	switch(id) {
-    		case DATE_PICKER_DIALOG: 
+    		case DATE_PICKER_DIALOG: 			//determines Id passed-if same as showDialog, returns user value
     			return showDatePicker();
     		case TIME_PICKER_DIALOG: 
     			return showTimePicker(); 
@@ -130,6 +133,7 @@ public class TaskerEditActivity extends Activity {
     	return timePicker; 
 	}
  	
+    //set-up date/time picker listener
 	private void registerButtonListenersAndSetDefaultText() {
 
 		mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +161,7 @@ public class TaskerEditActivity extends Activity {
           
         });
 
+		  //called to update button text
 		  updateDateButtonText(); 
 	      updateTimeButtonText();
 	}
@@ -166,7 +171,7 @@ public class TaskerEditActivity extends Activity {
   	
     	
     	// Only populate the text boxes and change the calendar date
-    	// if the row is not null from the database. 
+    	// if the row is not null from the DB 
         if (mRowId != null) {
             Cursor reminder = mDbHelper.fetchReminder(mRowId);
             startManagingCursor(reminder);
@@ -176,7 +181,7 @@ public class TaskerEditActivity extends Activity {
                     reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_BODY)));
             
 
-            // Get the date from the database and format it for our use. 
+            // Get the date from the DB and format it for our use 
             SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT);
             Date date = null;
 			try {
@@ -192,7 +197,7 @@ public class TaskerEditActivity extends Activity {
 				Log.e("TaskerEditActivity", e.getMessage(), e); 
 			} 
         } else {
-        	// This is a new task - add defaults from preferences if set. 
+        	// This is a new task - add defaults from preferences if set 
         	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
         	String defaultTitleKey = getString(R.string.pref_task_title_key); 
         	String defaultTimeKey = getString(R.string.pref_default_time_from_now_key); 
@@ -213,15 +218,16 @@ public class TaskerEditActivity extends Activity {
         	
     }
 
+    //actually implements user selection
 	private void updateTimeButtonText() {
-		// Set the time button text based upon the value from the database
+		// Set the time button text based upon the value from the DB
         SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT); 
         String timeForButton = timeFormat.format(mCalendar.getTime()); 
         mTimeButton.setText(timeForButton);
 	}
 
 	private void updateDateButtonText() {
-		// Set the date button text based upon the value from the database 
+		// Set the date button text based upon the value from the DB 
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT); 
         String dateForButton = dateFormat.format(mCalendar.getTime()); 
         mDateButton.setText(dateForButton);
