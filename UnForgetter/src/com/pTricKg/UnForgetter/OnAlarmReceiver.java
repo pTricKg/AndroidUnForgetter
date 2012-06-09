@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.util.Log;
-import com.pTricKg.UnForgetter.R;
 
 public class OnAlarmReceiver extends BroadcastReceiver {
 	private static final String TAG = ComponentInfo.class.getCanonicalName(); 

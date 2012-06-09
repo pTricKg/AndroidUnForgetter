@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.database.Cursor;
 import android.util.Log;
-import com.pTricKg.UnForgetter.R;
 
 public class OnBootReceiver extends BroadcastReceiver {
 
