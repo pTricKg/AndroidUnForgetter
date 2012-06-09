@@ -1,4 +1,4 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.database.Cursor;
 import android.util.Log;
+import com.pTricKg.UnForgetter.R;
 
 public class OnBootReceiver extends BroadcastReceiver {
 
@@ -17,9 +18,9 @@ public class OnBootReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		TaskerManager reminderMgr = new TaskerManager(context);
+		UnForgetterManager reminderMgr = new UnForgetterManager(context);
 
-		TaskerDbAdapter dbHelper = new TaskerDbAdapter(context);
+		UnForgetterDbAdapter dbHelper = new UnForgetterDbAdapter(context);
 		dbHelper.open();
 
 		Cursor cursor = dbHelper.fetchAllReminders();
@@ -27,8 +28,8 @@ public class OnBootReceiver extends BroadcastReceiver {
 		if(cursor != null) {
 			cursor.moveToFirst(); 
 
-			int rowIdColumnIndex = cursor.getColumnIndex(TaskerDbAdapter.KEY_ROWID);
-			int dateTimeColumnIndex = cursor.getColumnIndex(TaskerDbAdapter.KEY_DATE_TIME); 
+			int rowIdColumnIndex = cursor.getColumnIndex(UnForgetterDbAdapter.KEY_ROWID);
+			int dateTimeColumnIndex = cursor.getColumnIndex(UnForgetterDbAdapter.KEY_DATE_TIME); 
 
 			while(cursor.isAfterLast() == false) {
 
@@ -40,7 +41,7 @@ public class OnBootReceiver extends BroadcastReceiver {
 				String dateTime = cursor.getString(dateTimeColumnIndex); 
 
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat format = new SimpleDateFormat(TaskerEditActivity.DATE_TIME_FORMAT); 
+				SimpleDateFormat format = new SimpleDateFormat(UnForgetterEditActivity.DATE_TIME_FORMAT); 
 
 				try {
 					java.util.Date date = format.parse(dateTime);

@@ -1,4 +1,4 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -13,21 +13,22 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import com.pTricKg.UnForgetter.R;
 
-public class TaskerListActivity extends ListActivity {
+public class UnForgetterListActivity extends ListActivity {
 	
 	private static final int ACTIVITY_CREATE=0;
     private static final int ACTIVITY_EDIT=1;
     
-    private TaskerDbAdapter mDbHelper;
+    private UnForgetterDbAdapter mDbHelper;
     
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tasker_list);
+        setContentView(R.layout.unforgetter_list);
                 
-        mDbHelper = new TaskerDbAdapter(this);
+        mDbHelper = new UnForgetterDbAdapter(this);
         mDbHelper.open();
         fillData();
         
@@ -40,14 +41,14 @@ public class TaskerListActivity extends ListActivity {
         startManagingCursor(taskerCursor);
         
         //create array
-        String[] from = new String[]{TaskerDbAdapter.KEY_TITLE};
+        String[] from = new String[]{UnForgetterDbAdapter.KEY_TITLE};
         
         // specify which fields of array
         int[] to = new int[]{R.id.textView1};
         
         // set cursor
         SimpleCursorAdapter reminders = 
-        	    new SimpleCursorAdapter(this, R.layout.tasker_row, taskerCursor, from, to);
+        	    new SimpleCursorAdapter(this, R.layout.unforgetter_row, taskerCursor, from, to);
         setListAdapter(reminders);
     }
     
@@ -70,7 +71,7 @@ public class TaskerListActivity extends ListActivity {
   			return true;
   		
   		case R.id.menu_settings: 
-        	Intent i = new Intent(this, TaskerPreferences.class); 
+        	Intent i = new Intent(this, UnForgetterPreferences.class); 
         	startActivity(i); 
             return true;
   		}
@@ -89,7 +90,7 @@ public class TaskerListActivity extends ListActivity {
   		//Start TaskerEditActivity
   		private void createReminder() {
   			// TODO Auto-generated method stub
-  			Intent i = new Intent(this, TaskerEditActivity.class);
+  			Intent i = new Intent(this, UnForgetterEditActivity.class);
   			startActivityForResult(i, ACTIVITY_CREATE);
   		}
   		
@@ -99,8 +100,8 @@ public class TaskerListActivity extends ListActivity {
     	super.onListItemClick(l, v, position, id);
     	
     	//Set up Intent
-    	Intent i = new Intent(this, TaskerEditActivity.class);
-    	i.putExtra(TaskerDbAdapter.KEY_ROWID, id); //pull data
+    	Intent i = new Intent(this, UnForgetterEditActivity.class);
+    	i.putExtra(UnForgetterDbAdapter.KEY_ROWID, id); //pull data
         startActivityForResult(i, ACTIVITY_EDIT); 
     	
     }

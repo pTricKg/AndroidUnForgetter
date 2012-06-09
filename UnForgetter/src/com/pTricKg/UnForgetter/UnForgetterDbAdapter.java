@@ -1,4 +1,4 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -6,9 +6,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.pTricKg.UnForgetter.R;
 
 
-public class TaskerDbAdapter {
+public class UnForgetterDbAdapter {
 	
 	//DataBase
 	private static final String DATABASE_NAME = "data";
@@ -62,7 +63,7 @@ public class TaskerDbAdapter {
     
     //@param ctx Context within which to work
     
-    public TaskerDbAdapter(Context ctx) {
+    public UnForgetterDbAdapter(Context ctx) {
         this.mCtx = ctx;
     }
 
@@ -72,7 +73,7 @@ public class TaskerDbAdapter {
  	// @return this (self reference, allowing this to be chained in initialization call)
  	// @throws SQLException if DB cannot be opened or created
 
-    public TaskerDbAdapter open() throws SQLException {
+    public UnForgetterDbAdapter open() throws SQLException {
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
         return this;

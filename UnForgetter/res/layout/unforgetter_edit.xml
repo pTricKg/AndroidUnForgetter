@@ -47,23 +47,23 @@
         android:layout_gravity="center" />
 
     <TextView
-        android:id="@+id/tasker_date"
+        android:id="@+id/unforgetter_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/time" />
 
     <Button
-        android:id="@+id/tasker_timer"
+        android:id="@+id/unforgetter_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/tasker_save"
+        android:id="@+id/unforgetter_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/tasker_save" />
+        android:text="@string/unforgetter_save" />
 
 </LinearLayout>

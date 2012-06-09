@@ -1,4 +1,4 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 
 import java.text.SimpleDateFormat;
@@ -20,8 +20,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import com.pTricKg.UnForgetter.R;
 
-public class TaskerEditActivity extends Activity {
+public class UnForgetterEditActivity extends Activity {
 	
 	
 	//dialog stuff for date/time picker
@@ -40,27 +41,27 @@ public class TaskerEditActivity extends Activity {
     private Button mTimeButton;
     private Button mConfirmButton;
     private Long mRowId;
-    private TaskerDbAdapter mDbHelper;
+    private UnForgetterDbAdapter mDbHelper;
     private Calendar mCalendar;  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mDbHelper = new TaskerDbAdapter(this);
+        mDbHelper = new UnForgetterDbAdapter(this);
         
-        setContentView(R.layout.tasker_edit);
+        setContentView(R.layout.unforgetter_edit);
         
         //initializing variables
         mCalendar = Calendar.getInstance(); 
         mTitleText = (EditText) findViewById(R.id.title);
         mBodyText = (EditText) findViewById(R.id.body);
         mDateButton = (Button) findViewById(R.id.date_button);
-        mTimeButton = (Button) findViewById(R.id.tasker_timer);
+        mTimeButton = (Button) findViewById(R.id.unforgetter_timer);
       
-        mConfirmButton = (Button) findViewById(R.id.tasker_save);
+        mConfirmButton = (Button) findViewById(R.id.unforgetter_save);
        
-        mRowId = savedInstanceState != null ? savedInstanceState.getLong(TaskerDbAdapter.KEY_ROWID) 
+        mRowId = savedInstanceState != null ? savedInstanceState.getLong(UnForgetterDbAdapter.KEY_ROWID) 
                 							: null;
       
         registerButtonListenersAndSetDefaultText();
@@ -69,7 +70,7 @@ public class TaskerEditActivity extends Activity {
 	private void setRowIdFromIntent() {
 		if (mRowId == null) {
 			Bundle extras = getIntent().getExtras();            
-			mRowId = extras != null ? extras.getLong(TaskerDbAdapter.KEY_ROWID) 
+			mRowId = extras != null ? extras.getLong(UnForgetterDbAdapter.KEY_ROWID) 
 									: null;
 
 		}
@@ -106,7 +107,7 @@ public class TaskerEditActivity extends Activity {
  	private DatePickerDialog showDatePicker() {
 
 
-		DatePickerDialog datePicker = new DatePickerDialog(TaskerEditActivity.this, new DatePickerDialog.OnDateSetListener() {
+		DatePickerDialog datePicker = new DatePickerDialog(UnForgetterEditActivity.this, new DatePickerDialog.OnDateSetListener() {
 
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				mCalendar.set(Calendar.YEAR, year);
@@ -155,7 +156,7 @@ public class TaskerEditActivity extends Activity {
         	public void onClick(View view) {
         		saveState(); 
         		setResult(RESULT_OK);
-        	    Toast.makeText(TaskerEditActivity.this, getString(R.string.task_saved_message), Toast.LENGTH_SHORT).show();
+        	    Toast.makeText(UnForgetterEditActivity.this, getString(R.string.task_saved_message), Toast.LENGTH_SHORT).show();
         	    finish(); 
         	}
           
@@ -174,9 +175,9 @@ public class TaskerEditActivity extends Activity {
             Cursor reminder = mDbHelper.fetchReminder(mRowId);
             startManagingCursor(reminder);
             mTitleText.setText(reminder.getString(
-    	            reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_TITLE)));
+    	            reminder.getColumnIndexOrThrow(UnForgetterDbAdapter.KEY_TITLE)));
             mBodyText.setText(reminder.getString(
-                    reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_BODY)));
+                    reminder.getColumnIndexOrThrow(UnForgetterDbAdapter.KEY_BODY)));
             
             // Get the date from the DB and format it for our use 
             SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT);
@@ -184,7 +185,7 @@ public class TaskerEditActivity extends Activity {
 //			try {
 				
 				try {
-					String dateString = reminder.getString(reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_DATE_TIME)); 
+					String dateString = reminder.getString(reminder.getColumnIndexOrThrow(UnForgetterDbAdapter.KEY_DATE_TIME)); 
 					date = (Date) dateTimeFormat.parse(dateString);
 					mCalendar.setTime(date);
 				} catch (java.text.ParseException e) {
@@ -236,7 +237,7 @@ public class TaskerEditActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(TaskerDbAdapter.KEY_ROWID, mRowId);
+        outState.putLong(UnForgetterDbAdapter.KEY_ROWID, mRowId);
     }
     
 
@@ -258,6 +259,6 @@ public class TaskerEditActivity extends Activity {
             mDbHelper.updateReminder(mRowId, title, body, reminderDateTime);
         }
        
-        new TaskerManager(this).setReminder(mRowId, mCalendar); 
+        new UnForgetterManager(this).setReminder(mRowId, mCalendar); 
     }
 }

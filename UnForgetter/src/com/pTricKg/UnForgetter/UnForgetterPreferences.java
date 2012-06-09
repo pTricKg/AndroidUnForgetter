@@ -1,11 +1,12 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.text.method.DigitsKeyListener;
+import com.pTricKg.UnForgetter.R;
 
-public class TaskerPreferences extends PreferenceActivity {
+public class UnForgetterPreferences extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

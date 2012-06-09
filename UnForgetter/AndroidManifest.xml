@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pTricKg.Tasker"
+    package="com.pTricKg.UnForgetter"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,7 +15,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".TaskerListActivity"
+            android:name="com.pTricKg.UnForgetter.UnForgetterListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,21 +24,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TaskerEditActivity"
+            android:name="com.pTricKg.UnForgetter.UnForgetterEditActivity"
             android:label="@string/edit_reminder_title" >
         </activity>
         <activity
-            android:name=".TaskerPreferences"
+            android:name=".UnForgetterPreferences"
             android:label="@string/app_name" />
 
-        <receiver android:name=".OnBootReceiver" >
+        <receiver android:name="com.pTricKg.UnForgetter.OnBootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver android:name=".OnAlarmReceiver" />
 
-        <service android:name=".TaskerService" />
+        <service android:name=".UnForgetterService" />
     </application>
 
 </manifest>

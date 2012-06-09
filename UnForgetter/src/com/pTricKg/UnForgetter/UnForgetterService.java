@@ -1,25 +1,26 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
+import com.pTricKg.UnForgetter.R;
 
-public class TaskerService extends WakeTaskerIntentService {
-	public TaskerService() {
+public class UnForgetterService extends WakeUnForgetterIntentService {
+	public UnForgetterService() {
 		super("TaskerService");
 			}
 
 	@Override
 	void doTaskerWork(Intent intent) {
 		Log.d("TaskerService", "Doing work.");
-		Long rowId = intent.getExtras().getLong(TaskerDbAdapter.KEY_ROWID);
+		Long rowId = intent.getExtras().getLong(UnForgetterDbAdapter.KEY_ROWID);
 
 		NotificationManager mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-		Intent notificationIntent = new Intent(this, TaskerEditActivity.class); 
-		notificationIntent.putExtra(TaskerDbAdapter.KEY_ROWID, rowId); 
+		Intent notificationIntent = new Intent(this, UnForgetterEditActivity.class); 
+		notificationIntent.putExtra(UnForgetterDbAdapter.KEY_ROWID, rowId); 
 
 		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT); 
 

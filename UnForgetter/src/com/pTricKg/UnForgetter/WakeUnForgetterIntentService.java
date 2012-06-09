@@ -1,13 +1,14 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
+import com.pTricKg.UnForgetter.R;
 
 
 
-public abstract class WakeTaskerIntentService extends IntentService {
+public abstract class WakeUnForgetterIntentService extends IntentService {
 abstract void doTaskerWork(Intent intent);
 
 	public static final String LOCK_NAME_STATIC="com.pTricKg.Tasker.Static";
@@ -27,7 +28,7 @@ abstract void doTaskerWork(Intent intent);
 		return(lockStatic);
 	}
 
-	public WakeTaskerIntentService(String name) {
+	public WakeUnForgetterIntentService(String name) {
 		super(name);
 	}
 

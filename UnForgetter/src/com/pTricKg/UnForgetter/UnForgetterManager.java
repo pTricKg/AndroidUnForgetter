@@ -1,4 +1,4 @@
-package com.pTricKg.Tasker;
+package com.pTricKg.UnForgetter;
 
 import java.util.Calendar;
 
@@ -6,12 +6,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import com.pTricKg.UnForgetter.R;
 
-public class TaskerManager {
+public class UnForgetterManager {
 	private Context mContext; 
 	private AlarmManager mAlarmManager;
 
-	public TaskerManager(Context context) {
+	public UnForgetterManager(Context context) {
 		mContext = context; 
 		mAlarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 	}
@@ -19,7 +20,7 @@ public class TaskerManager {
 	public void setReminder(Long taskId, Calendar when) {
 
         Intent i = new Intent(mContext, OnAlarmReceiver.class);
-        i.putExtra(TaskerDbAdapter.KEY_ROWID, (long)taskId); 
+        i.putExtra(UnForgetterDbAdapter.KEY_ROWID, (long)taskId); 
 
         PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, i, PendingIntent.FLAG_ONE_SHOT); 
         
