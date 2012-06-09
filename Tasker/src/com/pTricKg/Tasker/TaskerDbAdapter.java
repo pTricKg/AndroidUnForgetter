@@ -25,9 +25,7 @@ public class TaskerDbAdapter {
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
     
-    /**
-     * Database creation SQL statement
-     */
+    //DB creation SQL statement
     private static final String DATABASE_CREATE =
             "create table " + DATABASE_TABLE + " ("
             		+ KEY_ROWID + " integer primary key autoincrement, "
@@ -60,25 +58,20 @@ public class TaskerDbAdapter {
         }
     }
 
-    /**
-     * Constructor - takes the context to allow the database to be
-     * opened/created
-     * 
-     * @param ctx the Context within which to work
-     */
+    //constructor - takes context to allow DB to be opened/created
+    
+    //@param ctx Context within which to work
+    
     public TaskerDbAdapter(Context ctx) {
         this.mCtx = ctx;
     }
 
-    /**
-     * Open the database. If it cannot be opened, try to create a new
-     * instance of the database. If it cannot be created, throw an exception to
-     * signal the failure
-     * 
-     * @return this (self reference, allowing this to be chained in an
-     *         initialization call)
-     * @throws SQLException if the database could be neither opened or created
-     */
+    // Open DB, if cannot, try create new
+ 	// If cannot, throw exception to signal failure
+ 	
+ 	// @return this (self reference, allowing this to be chained in initialization call)
+ 	// @throws SQLException if DB cannot be opened or created
+
     public TaskerDbAdapter open() throws SQLException {
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
@@ -89,17 +82,10 @@ public class TaskerDbAdapter {
         mDbHelper.close();
     }
 
-
-    /**
-     * Create a new reminder using the title, body and reminder date time provided. 
-     * If the reminder is  successfully created return the new rowId
-     * for that reminder, otherwise return a -1 to indicate failure.
-     * 
-     * @param title the title of the reminder
-     * @param body the body of the reminder
-     * @param reminderDateTime the date and time the reminder should remind the user
-     * @return rowId or -1 if failed
-     */
+    // Create new task using the title, body and date/time provided 
+ 	// If successfully created return the new rowId
+ 	// otherwise return -1 to indicate failure
+   
     public long createReminder(String title, String body, String reminderDateTime) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_TITLE, title);
@@ -109,35 +95,32 @@ public class TaskerDbAdapter {
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    /**
-     * Delete the reminder with the given rowId
-     * 
-     * @param rowId id of reminder to delete
-     * @return true if deleted, false otherwise
-     */
+    // Delete task with the given rowId
+    
+    // @param rowId id of task to delete
+    // @return true if deleted, false otherwise
+    
     public boolean deleteReminder(long rowId) {
 
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-    /**
-     * Return a Cursor over the list of all reminders in the database
-     * 
-     * @return Cursor over all reminders
-     */
+    // Return Cursor over the list of tasks in DB
+    
+    //  Cursor over all tasks
+    
     public Cursor fetchAllReminders() {
 
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,
                 KEY_BODY, KEY_DATE_TIME}, null, null, null, null, null);
     }
 
-    /**
-     * Return a Cursor positioned at the reminder that matches the given rowId
-     * 
-     * @param rowId id of reminder to retrieve
-     * @return Cursor positioned to matching reminder, if found
-     * @throws SQLException if reminder could not be found/retrieved
-     */
+    // Return Cursor positioned at task that matches given rowId
+    
+    // @param rowId id of task to retrieve
+    // @return Cursor positioned to matching task, if found
+    // @throws SQLException if task could not be found/retrieved
+    
     public Cursor fetchReminder(long rowId) throws SQLException {
 
         Cursor mCursor =
@@ -152,17 +135,15 @@ public class TaskerDbAdapter {
 
     }
 
-    /**
-     * Update the reminder using the details provided. The reminder to be updated is
-     * specified using the rowId, and it is altered to use the title, body and reminder date time
-     * values passed in
-     * 
-     * @param rowId id of reminder to update
-     * @param title value to set reminder title to
-     * @param body value to set reminder body to
-     * @param reminderDateTime value to set the reminder time. 
-     * @return true if the reminder was successfully updated, false otherwise
-     */
+    // Update tasks using the details provided. Task to be updated is
+    // specified using the rowId, and altered to use the title, body, date/time values
+        
+    // @param rowId id to update
+    // @param title value to set title
+    // @param body value to set body
+    // @param reminderDateTime value to set time
+    // @return true if successfully updated, otherwise false
+    
     public boolean updateReminder(long rowId, String title, String body, String reminderDateTime) {
         ContentValues args = new ContentValues();
         args.put(KEY_TITLE, title);
