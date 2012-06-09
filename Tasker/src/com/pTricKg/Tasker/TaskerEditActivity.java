@@ -1,8 +1,9 @@
 package com.pTricKg.Tasker;
 
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -10,7 +11,6 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.ParseException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -167,9 +167,7 @@ public class TaskerEditActivity extends Activity {
 	}
    
     private void populateFields()  {
-    	
-  	
-    	
+    	    	
     	// Only populate the text boxes and change the calendar date
     	// if the row is not null from the DB 
         if (mRowId != null) {
@@ -180,22 +178,24 @@ public class TaskerEditActivity extends Activity {
             mBodyText.setText(reminder.getString(
                     reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_BODY)));
             
-
             // Get the date from the DB and format it for our use 
             SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT);
             Date date = null;
-			try {
-				String dateString = reminder.getString(reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_DATE_TIME)); 
+//			try {
+				
 				try {
+					String dateString = reminder.getString(reminder.getColumnIndexOrThrow(TaskerDbAdapter.KEY_DATE_TIME)); 
 					date = (Date) dateTimeFormat.parse(dateString);
+					mCalendar.setTime(date);
 				} catch (java.text.ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Log.e("TaskerEditActivity", e.getMessage(), e); 
 				}
-	            mCalendar.setTime(date); 
-			} catch (ParseException e) {
-				Log.e("TaskerEditActivity", e.getMessage(), e); 
-			} 
+	             
+//			} catch (ParseException e) {
+//				Log.e("TaskerEditActivity", e.getMessage(), e); 
+//			} 
         } else {
         	// This is a new task - add defaults from preferences if set 
         	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 

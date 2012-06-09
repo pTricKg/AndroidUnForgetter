@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 
+
+
 public abstract class WakeTaskerIntentService extends IntentService {
 abstract void doTaskerWork(Intent intent);
 

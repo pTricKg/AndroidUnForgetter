@@ -31,7 +31,7 @@ public class TaskerListActivity extends ListActivity {
         mDbHelper.open();
         fillData();
         
-         registerForContextMenu(getListView());
+        registerForContextMenu(getListView());
          
     }
     
@@ -85,20 +85,7 @@ public class TaskerListActivity extends ListActivity {
   			mi.inflate(R.menu.list_menu_item_longpress, menu);
   			
   			}
-  	//handles user interaction for ContextMenu
-  		@Override
-  		public boolean onContextItemSelected(MenuItem item) {
-  			switch(item.getItemId()) {
-  			case R.id.menu_delete:
-  				//delete task
-  				AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-  		        mDbHelper.deleteReminder(info.id);
-  		        fillData();
-  				return true;
-  		}
-  			return super.onContextItemSelected(item);
-  	}
-  	
+  	  	
   		//Start TaskerEditActivity
   		private void createReminder() {
   			// TODO Auto-generated method stub
@@ -125,5 +112,17 @@ public class TaskerListActivity extends ListActivity {
 		fillData();
 	}
 	
-	
+	//handles user interaction for ContextMenu
+		@Override
+		public boolean onContextItemSelected(MenuItem item) {
+			switch(item.getItemId()) {
+			case R.id.menu_delete:
+				//delete task
+				AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		        mDbHelper.deleteReminder(info.id);
+		        fillData();
+				return true;
+		}
+			return super.onContextItemSelected(item);
+		}
 }

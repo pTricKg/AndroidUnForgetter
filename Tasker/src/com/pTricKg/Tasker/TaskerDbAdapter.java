@@ -46,7 +46,7 @@ public class TaskerDbAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
 
-            db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE);  //magic! accepts SQL to create DB table
         }
 
         @Override
