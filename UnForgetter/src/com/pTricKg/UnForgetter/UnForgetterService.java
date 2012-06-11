@@ -9,14 +9,15 @@ import com.pTricKg.UnForgetter.R;
 
 public class UnForgetterService extends WakeUnForgetterIntentService {
 	public UnForgetterService() {
-		super("TaskerService");
+		super("UnForgetterService");
 			}
 
 	@Override
 	void doTaskerWork(Intent intent) {
-		Log.d("TaskerService", "Doing work.");
+		Log.d("UnForgetterService", "Doing work.");
 		Long rowId = intent.getExtras().getLong(UnForgetterDbAdapter.KEY_ROWID);
 
+		//set up notification bar alerts
 		NotificationManager mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
 		Intent notificationIntent = new Intent(this, UnForgetterEditActivity.class); 
@@ -33,6 +34,8 @@ public class UnForgetterService extends WakeUnForgetterIntentService {
 		// I highly doubt this will ever happen. But is good to note. 
 		int id = (int)((long)rowId);
 		mgr.notify(id, note); 
+		mgr.cancel(id);
+		mgr.cancelAll();
 
 
 	}

@@ -67,6 +67,7 @@ public class UnForgetterEditActivity extends Activity {
         registerButtonListenersAndSetDefaultText();
     }
 
+  //links creation/edit tasks from ListActivity
 	private void setRowIdFromIntent() {
 		if (mRowId == null) {
 			Bundle extras = getIntent().getExtras();            
@@ -241,7 +242,7 @@ public class UnForgetterEditActivity extends Activity {
     }
     
 
-    
+    //determines whether to save new or an updated task
     private void saveState() {
         String title = mTitleText.getText().toString();
         String body = mBodyText.getText().toString();
@@ -259,6 +260,7 @@ public class UnForgetterEditActivity extends Activity {
             mDbHelper.updateReminder(mRowId, title, body, reminderDateTime);
         }
        
+        //creates notification for set UnForgetter tasks
         new UnForgetterManager(this).setReminder(mRowId, mCalendar); 
     }
 }

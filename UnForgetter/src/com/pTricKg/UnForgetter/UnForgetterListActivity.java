@@ -30,23 +30,24 @@ public class UnForgetterListActivity extends ListActivity {
                 
         mDbHelper = new UnForgetterDbAdapter(this);
         mDbHelper.open();
-        fillData();
+        fillData();                                 
         
         registerForContextMenu(getListView());
          
     }
     
+  //loads SQL data into ListView
     private void fillData() {
         Cursor taskerCursor = mDbHelper.fetchAllReminders();
         startManagingCursor(taskerCursor);
         
-        //create array
+        //create array.  returns task title
         String[] from = new String[]{UnForgetterDbAdapter.KEY_TITLE};
         
-        // specify which fields of array
-        int[] to = new int[]{R.id.textView1};
+        // specify which fields of array to return
+        int[] to = new int[]{R.id.textRow};
         
-        // set cursor
+        // set cursor to pull form XML layout
         SimpleCursorAdapter reminders = 
         	    new SimpleCursorAdapter(this, R.layout.unforgetter_row, taskerCursor, from, to);
         setListAdapter(reminders);
@@ -87,7 +88,7 @@ public class UnForgetterListActivity extends ListActivity {
   			
   			}
   	  	
-  		//Start TaskerEditActivity
+  		//Start UnForgetterEditActivity.  for creating UnForgetter tasks
   		private void createReminder() {
   			// TODO Auto-generated method stub
   			Intent i = new Intent(this, UnForgetterEditActivity.class);
@@ -99,7 +100,7 @@ public class UnForgetterListActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
     	super.onListItemClick(l, v, position, id);
     	
-    	//Set up Intent
+    	//Set up Intent for checking whether to edit present tasks or create new
     	Intent i = new Intent(this, UnForgetterEditActivity.class);
     	i.putExtra(UnForgetterDbAdapter.KEY_ROWID, id); //pull data
         startActivityForResult(i, ACTIVITY_EDIT); 
@@ -110,7 +111,7 @@ public class UnForgetterListActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		fillData();
+		fillData();                                                          //returns edited data from DB
 	}
 	
 	//handles user interaction for ContextMenu
@@ -121,7 +122,7 @@ public class UnForgetterListActivity extends ListActivity {
 				//delete task
 				AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		        mDbHelper.deleteReminder(info.id);
-		        fillData();
+		        fillData();                                                  //returns deleted data from DB
 				return true;
 		}
 			return super.onContextItemSelected(item);
