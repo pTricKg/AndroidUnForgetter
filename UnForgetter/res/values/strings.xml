@@ -9,7 +9,7 @@
 	<string name="menu_delete">Delete Task</string>
 	 <string name="title">UnForget</string>
     <string name="body">What\'s going on?</string>
-    <string name="unforgetter_save">Save Task</string>
+    <string name="unforgetter_save">UnForget This!</string>
     <string name="edit_reminder">Edit Task</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
@@ -22,20 +22,20 @@
     <string name="notify_new_task_title">UnForget Task!</string>
     
     <!-- Preferences -->
-    <string name="pref_category_task_defaults_key">task_default_category</string>
-	<string name="pref_category_task_defaults_title">Task Title Default</string>
-	<string name="pref_task_title_key">default_tasker_title</string>
-	<string name="pref_task_title_dialog_title">Default Tasker Title</string>
-	<string name="pref_task_title_message">The default title for task.</string>
-	<string name="pref_task_title_summary">Default title for tasker.</string>
-	<string name="pref_task_title_title">Default Tasker Title</string>
+    <string name="pref_category_task_defaults_key">unforgetter_default_category</string>
+	<string name="pref_category_task_defaults_title">UnForgetter Title Default</string>
+	<string name="pref_task_title_key">default_unforgetter_title</string>
+	<string name="pref_task_title_dialog_title">Default UnForgetter Title</string>
+	<string name="pref_task_title_message">The default title for UnForgetter.</string>
+	<string name="pref_task_title_summary">Default title for UnForgetter.</string>
+	<string name="pref_task_title_title">Default UnForgetter Title</string>
     
     <string name="pref_category_datetime_key">date_time_default_category</string>
     <string name="pref_category_datetime_title">Date Time Defaults</string>
     <string name="pref_default_time_from_now_key">time_from_now_default</string>
     <string name="pref_default_time_from_now_dialog_title">Time From Now</string>
-    <string name="pref_default_time_from_now_message">The default time from now that a new tasker should be set to.</string>
-	<string name="pref_default_time_from_now_summary">Sets the default time for a tasker.</string>
-	<string name="pref_default_time_from_now_title">Default Tasker Time</string>
+    <string name="pref_default_time_from_now_message">The default time from now that a new UnForgetter should be set to.</string>
+	<string name="pref_default_time_from_now_summary">Sets the default time for UnForgetter.</string>
+	<string name="pref_default_time_from_now_title">Default UnForgetter Time</string>
 	
 </resources>
