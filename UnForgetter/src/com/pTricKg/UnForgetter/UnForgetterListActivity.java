@@ -37,7 +37,8 @@ public class UnForgetterListActivity extends ListActivity {
     }
     
   //loads SQL data into ListView
-    private void fillData() {
+    @SuppressWarnings("deprecation")
+	private void fillData() {
         Cursor taskerCursor = mDbHelper.fetchAllReminders();
         startManagingCursor(taskerCursor);
         

@@ -93,7 +93,8 @@ public class UnForgetterEditActivity extends Activity {
     
     //called by showDialog method in registerButtonListener
     //int id passed into showDialog
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected Dialog onCreateDialog(int id) {
     	switch(id) {
     		case DATE_PICKER_DIALOG: 			//determines Id passed-if same as showDialog, returns user value
@@ -140,6 +141,7 @@ public class UnForgetterEditActivity extends Activity {
 
 		mDateButton.setOnClickListener(new View.OnClickListener() {
 
+			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
 				showDialog(DATE_PICKER_DIALOG);  
 			}
@@ -148,6 +150,7 @@ public class UnForgetterEditActivity extends Activity {
 
 		mTimeButton.setOnClickListener(new View.OnClickListener() {
 
+			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
 				showDialog(TIME_PICKER_DIALOG); 
 			}
@@ -168,7 +171,8 @@ public class UnForgetterEditActivity extends Activity {
 	      updateTimeButtonText();
 	}
    
-    private void populateFields()  {
+    @SuppressWarnings("deprecation")
+	private void populateFields()  {
     	    	
     	// Only populate the text boxes and change the calendar date
     	// if the row is not null from the DB 

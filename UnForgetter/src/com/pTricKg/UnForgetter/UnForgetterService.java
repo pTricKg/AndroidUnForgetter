@@ -12,6 +12,7 @@ public class UnForgetterService extends WakeUnForgetterIntentService {
 		super("UnForgetterService");
 			}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	void doTaskerWork(Intent intent) {
 		Log.d("UnForgetterService", "Doing work.");
