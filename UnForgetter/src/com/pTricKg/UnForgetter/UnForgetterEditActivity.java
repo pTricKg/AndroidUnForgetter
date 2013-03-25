@@ -31,8 +31,8 @@ public class UnForgetterEditActivity extends Activity {
 
 	//date and time stuff
 	private static final String DATE_FORMAT = "MM-dd-yyyy"; 
-	private static final String TIME_FORMAT = "kk:mm";
-	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy kk:mm:ss";
+	private static final String TIME_FORMAT = "hh:mm";
+	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy hh:mm:ss";
 
 //	initialized variables
 	private EditText mTitleText;
@@ -127,11 +127,11 @@ public class UnForgetterEditActivity extends Activity {
     	TimePickerDialog timePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
 
     		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-				mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+				mCalendar.set(Calendar.HOUR, hourOfDay);
 				mCalendar.set(Calendar.MINUTE, minute); 
 				updateTimeButtonText(); 
 			}
-		}, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), true); 
+		}, mCalendar.get(Calendar.HOUR), mCalendar.get(Calendar.MINUTE), true); 
 
     	return timePicker; 
 	}
