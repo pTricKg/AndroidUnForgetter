@@ -3,41 +3,79 @@ package com.pTricKg.UnForgetter;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import com.pTricKg.UnForgetter.R;
 
 public class UnForgetterService extends WakeUnForgetterIntentService {
+	
+	final int currentapiVersion = Integer.parseInt(Build.VERSION.CODENAME);
+
 	public UnForgetterService() {
 		super("UnForgetterService");
-			}
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	void doTaskerWork(Intent intent) {
 		Log.d("UnForgetterService", "Doing work.");
 		Long rowId = intent.getExtras().getLong(UnForgetterDbAdapter.KEY_ROWID);
+		int id = (int) ((long) rowId);
+		// set up notification bar alerts
+		NotificationManager mgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-		//set up notification bar alerts
-		NotificationManager mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		Intent notificationIntent = new Intent(this,
+				UnForgetterEditActivity.class);
+		notificationIntent.putExtra(UnForgetterDbAdapter.KEY_ROWID, rowId);
 
-		Intent notificationIntent = new Intent(this, UnForgetterEditActivity.class); 
-		notificationIntent.putExtra(UnForgetterDbAdapter.KEY_ROWID, rowId); 
+		PendingIntent pi = PendingIntent.getActivity(this, 0,
+				notificationIntent, PendingIntent.FLAG_ONE_SHOT);
 
-		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT); 
+		
+			if (currentapiVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
+				Log.d("check api version", "if");
+				Notification note = new Notification(
+						android.R.drawable.stat_sys_warning,
+						getString(R.string.notify_new_task_message),
+						System.currentTimeMillis());
+				note.setLatestEventInfo(this,
+						getString(R.string.notify_new_task_title),
+						getString(R.string.notify_new_task_message), pi);
+				note.defaults |= Notification.DEFAULT_SOUND;
+				note.flags |= Notification.FLAG_AUTO_CANCEL;
+				mgr.notify(id, note);
+			} else {
+				Log.d("check api version", "else");
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(
+						this);
+				Notification note = builder
+						.setContentIntent(pi)
+						.setSmallIcon(android.R.drawable.stat_sys_warning)
+						.setTicker(getString(R.string.notify_new_task_message))
+						.setWhen(System.currentTimeMillis())
+						.setAutoCancel(true)
+						.setContentTitle(
+								getString(R.string.notify_new_task_message))
+						.setContentText(getString(R.string.notify_new_task_message)).build();
+						
+	
+				builder.setSound(RingtoneManager
+						.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				mgr.notify(id, note);
+	
+			}
+		
 
-		Notification note=new Notification(android.R.drawable.stat_sys_warning, getString(R.string.notify_new_task_message), System.currentTimeMillis());
-		note.setLatestEventInfo(this, getString(R.string.notify_new_task_title), getString(R.string.notify_new_task_message), pi);
-		note.defaults |= Notification.DEFAULT_SOUND; 
-		note.flags |= Notification.FLAG_AUTO_CANCEL; 
-
-		// An issue could occur if user ever enters over 2,147,483,647 tasks. (Max int value). 
-		// I highly doubt this will ever happen. But is good to note. 
-		int id = (int)((long)rowId);
-		mgr.notify(id, note); 
+		// An issue could occur if user ever enters over 2,147,483,647 tasks.
+		// (Max int value).
+		// I highly doubt this will ever happen. But is good to note.
+		
+		// mgr.notify(id, note);
 		mgr.cancel(id);
 		mgr.cancelAll();
 
-
-	}
+}
 }
