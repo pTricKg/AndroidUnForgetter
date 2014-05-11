@@ -5,15 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class UnForgetterService extends WakeUnForgetterIntentService {
 	
-	final int currentapiVersion = Integer.parseInt(Build.VERSION.CODENAME);
-
 	public UnForgetterService() {
 		super("UnForgetterService");
 	}
@@ -35,40 +31,33 @@ public class UnForgetterService extends WakeUnForgetterIntentService {
 				notificationIntent, PendingIntent.FLAG_ONE_SHOT);
 
 		
-			if (currentapiVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
-				Log.d("check api version", "if");
-				Notification note = new Notification(
-						android.R.drawable.stat_sys_warning,
-						getString(R.string.notify_new_task_message),
-						System.currentTimeMillis());
-				note.setLatestEventInfo(this,
-						getString(R.string.notify_new_task_title),
-						getString(R.string.notify_new_task_message), pi);
-				note.defaults |= Notification.DEFAULT_SOUND;
-				note.flags |= Notification.FLAG_AUTO_CANCEL;
-				mgr.notify(id, note);
-			} else {
-				Log.d("check api version", "else");
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(
-						this);
-				Notification note = builder
-						.setContentIntent(pi)
-						.setSmallIcon(android.R.drawable.stat_sys_warning)
-						.setTicker(getString(R.string.notify_new_task_message))
-						.setWhen(System.currentTimeMillis())
-						.setAutoCancel(true)
-						.setContentTitle(
-								getString(R.string.notify_new_task_message))
-						.setContentText(getString(R.string.notify_new_task_message)).build();
+			Notification note = new Notification(
+					android.R.drawable.stat_sys_warning,
+					getString(R.string.notify_new_task_message),
+					System.currentTimeMillis());
+			note.setLatestEventInfo(this,
+					getString(R.string.notify_new_task_title),
+					getString(R.string.notify_new_task_message), pi);
+			note.defaults |= Notification.DEFAULT_SOUND;
+			note.flags |= Notification.FLAG_AUTO_CANCEL;
+			mgr.notify(id, note);
+			
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(
+					this);
+			Notification note1 = builder
+					.setContentIntent(pi)
+					.setSmallIcon(android.R.drawable.stat_sys_warning)
+					.setTicker(getString(R.string.notify_new_task_message))
+					.setWhen(System.currentTimeMillis())
+					.setAutoCancel(true)
+					.setContentTitle(
+							getString(R.string.notify_new_task_message))
+					.setContentText(getString(R.string.notify_new_task_message)).build();
 						
 	
-				builder.setSound(RingtoneManager
-						.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-				mgr.notify(id, note);
+			mgr.notify(id, note1);
 	
-			}
-		
-
+			
 		// An issue could occur if user ever enters over 2,147,483,647 tasks.
 		// (Max int value).
 		// I highly doubt this will ever happen. But is good to note.
