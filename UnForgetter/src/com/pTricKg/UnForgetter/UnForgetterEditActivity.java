@@ -4,7 +4,7 @@ package com.pTricKg.UnForgetter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -185,9 +185,9 @@ public class UnForgetterEditActivity extends Activity {
                     reminder.getColumnIndexOrThrow(UnForgetterDbAdapter.KEY_BODY)));
             
             // Get the date from the DB and format it for our use 
-            SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT);
+            SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
             Date date = null;
-//			try {
+
 				
 				try {
 					String dateString = reminder.getString(reminder.getColumnIndexOrThrow(UnForgetterDbAdapter.KEY_DATE_TIME)); 
@@ -199,9 +199,7 @@ public class UnForgetterEditActivity extends Activity {
 					Log.e("TaskerEditActivity", e.getMessage(), e); 
 				}
 	             
-//			} catch (ParseException e) {
-//				Log.e("TaskerEditActivity", e.getMessage(), e); 
-//			} 
+
         } else {
         	// This is a new task - add defaults from preferences if set 
         	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
@@ -227,14 +225,14 @@ public class UnForgetterEditActivity extends Activity {
     //actually implements user selection
 	private void updateTimeButtonText() {
 		// Set the time button text based upon the value from the DB
-        SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT); 
+        SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.US); 
         String timeForButton = timeFormat.format(mCalendar.getTime()); 
         mTimeButton.setText(timeForButton);
 	}
 
 	private void updateDateButtonText() {
 		// Set the date button text based upon the value from the DB 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT); 
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.US); 
         String dateForButton = dateFormat.format(mCalendar.getTime()); 
         mDateButton.setText(dateForButton);
 	}
@@ -251,7 +249,7 @@ public class UnForgetterEditActivity extends Activity {
         String title = mTitleText.getText().toString();
         String body = mBodyText.getText().toString();
 
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT); 
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US); 
     	String reminderDateTime = dateTimeFormat.format(mCalendar.getTime());
 
         if (mRowId == null) {
