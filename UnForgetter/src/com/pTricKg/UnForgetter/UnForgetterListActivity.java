@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.pTricKg.UnForgetter.R;
 
 public class UnForgetterListActivity extends ListActivity {
 	
@@ -91,7 +90,7 @@ public class UnForgetterListActivity extends ListActivity {
   	  	
   		//Start UnForgetterEditActivity.  for creating UnForgetter tasks
   		private void createReminder() {
-  			// TODO Auto-generated method stub
+  			
   			Intent i = new Intent(this, UnForgetterEditActivity.class);
   			startActivityForResult(i, ACTIVITY_CREATE);
   		}
