@@ -1,5 +1,7 @@
 package com.pTricKg.UnForgetter;
 
+import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +23,6 @@ public class UnForgetterListActivity extends ListActivity {
     
     private UnForgetterDbAdapter mDbHelper;
     
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,31 @@ public class UnForgetterListActivity extends ListActivity {
         
         registerForContextMenu(getListView());
          
+    }
+    
+    //attempting fix for deprecated Cursor
+    private ArrayList<Cursor> managedCursors = new ArrayList<Cursor>();
+
+    @Override
+    public void startManagingCursor(Cursor c) {
+    	synchronized(managedCursors) {
+    		if (!managedCursors.contains(c)) managedCursors.add(c);
+    	}
+    }
+    
+    @Override
+    public void stopManagingCursor(Cursor c) {
+    	synchronized(managedCursors) {
+    		managedCursors.remove(c);
+    	}
+    }
+
+    private void destroyManagedCursors() {
+    	synchronized(managedCursors) {
+    		for (Cursor c:managedCursors) {
+    			c.close();
+    		}
+    	}
     }
     
   //loads SQL data into ListView
@@ -111,7 +137,9 @@ public class UnForgetterListActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		fillData();                                                          //returns edited data from DB
+		fillData();   //returns edited data from DB
+		
+		destroyManagedCursors();
 	}
 	
 	//handles user interaction for ContextMenu
@@ -126,5 +154,8 @@ public class UnForgetterListActivity extends ListActivity {
 				return true;
 		}
 			return super.onContextItemSelected(item);
+			
 		}
+		
+		
 }
