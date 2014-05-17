@@ -191,13 +191,23 @@ public class UnForgetterListActivity extends ListActivity implements
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-		// TODO Auto-generated method stub
+		// A switch-case is useful when dealing with multiple Loaders/IDs
+	    switch (loader.getId()) {
+	      case LOADER_ID:
+	        // The asynchronous load is complete and the data
+	        // is now available for use. Only now can we associate
+	        // the queried Cursor with the SimpleCursorAdapter.
+	        mAdapter.swapCursor(cursor);
+	        break;
 
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
-		// TODO Auto-generated method stub
+		// For whatever reason, the Loader's data is now unavailable.
+	    // Remove any references to the old data by replacing it with
+	    // a null Cursor.
+	    mAdapter.swapCursor(null);
 
 	}
 
